@@ -163,3 +163,4 @@ const SchoolCard = ({ school, onEnquire }) => {
 };
 
 export default SchoolCard;
+

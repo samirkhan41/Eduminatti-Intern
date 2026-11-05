@@ -19,3 +19,4 @@ router
   .delete(protect, admin, deleteEnquiry);
 
 module.exports = router;
+

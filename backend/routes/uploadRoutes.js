@@ -95,3 +95,4 @@ router.post('/', protect, admin, upload.single('image'), async (req, res) => {
 });
 
 module.exports = router;
+

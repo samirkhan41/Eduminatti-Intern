@@ -133,3 +133,4 @@ const SchoolListItem = ({ school, onEnquire }) => {
 };
 
 export default SchoolListItem;
+

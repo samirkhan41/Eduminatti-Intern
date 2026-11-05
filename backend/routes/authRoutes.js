@@ -15,3 +15,4 @@ router.route('/profile').get(protect, getUserProfile).put(protect, updateUserPro
 router.post('/saved-schools/:schoolId', protect, toggleSaveSchool);
 
 module.exports = router;
+

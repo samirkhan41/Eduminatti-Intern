@@ -59,3 +59,4 @@ const AdmissionSupportBanner = ({ onOpenEnquiry }) => {
 };
 
 export default AdmissionSupportBanner;
+

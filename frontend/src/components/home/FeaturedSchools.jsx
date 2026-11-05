@@ -147,3 +147,4 @@ const FeaturedSchools = ({ onEnquire }) => {
 };
 
 export default FeaturedSchools;
+

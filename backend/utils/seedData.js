@@ -995,3 +995,4 @@ if (require.main === module) {
 }
 
 module.exports = { schoolsData, adminUser, demoUser, seedDatabase };
+

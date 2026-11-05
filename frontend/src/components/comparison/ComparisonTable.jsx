@@ -339,3 +339,4 @@ const ComparisonTable = ({
 };
 
 export default ComparisonTable;
+

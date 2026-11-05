@@ -148,3 +148,4 @@ const EnquiryStatusModal = ({ isOpen, onClose, enquiry, onUpdated }) => {
 };
 
 export default EnquiryStatusModal;
+

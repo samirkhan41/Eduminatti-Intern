@@ -376,3 +376,4 @@ const SchoolFormModal = ({ isOpen, onClose, schoolToEdit = null, onSaved }) => {
 };
 
 export default SchoolFormModal;
+

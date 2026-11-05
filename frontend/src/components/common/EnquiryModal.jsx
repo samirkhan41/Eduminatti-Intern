@@ -372,3 +372,4 @@ const EnquiryModal = ({ isOpen, onClose, preselectedSchool = null }) => {
 };
 
 export default EnquiryModal;
+

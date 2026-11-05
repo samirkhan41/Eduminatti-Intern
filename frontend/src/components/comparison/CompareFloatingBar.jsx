@@ -78,3 +78,4 @@ const CompareFloatingBar = () => {
 };
 
 export default CompareFloatingBar;
+

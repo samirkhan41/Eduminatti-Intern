@@ -74,3 +74,4 @@ const enquirySchema = new mongoose.Schema(
 );
 
 module.exports = mongoose.model('Enquiry', enquirySchema);
+

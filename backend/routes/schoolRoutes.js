@@ -25,3 +25,4 @@ router
   .delete(protect, admin, deleteSchool);
 
 module.exports = router;
+
