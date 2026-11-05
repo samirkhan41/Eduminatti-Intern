@@ -53,4 +53,17 @@ const server = app.listen(PORT, () => {
   console.log(`[Eduminatti Backend] Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
 });
 
+// Handle port in use and other startup errors gracefully
+server.on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    console.error(`\n❌ [PORT CONFLICT] Port ${PORT} is already in use by another process.`);
+    console.error(`👉 Run this one-line command to free port ${PORT}:`);
+    console.error(`   lsof -ti :${PORT} | xargs kill -9\n`);
+    console.error(`Then re-run: npm run dev\n`);
+    process.exit(1);
+  } else {
+    console.error('Server error:', err);
+  }
+});
+
 module.exports = app;

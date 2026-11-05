@@ -8,7 +8,8 @@
     "dev:backend": "npm run dev --prefix backend",
     "dev:frontend": "npm run dev --prefix frontend",
     "seed": "npm run seed --prefix backend",
-    "build": "npm run build --prefix frontend"
+    "build": "npm run build --prefix frontend",
+    "kill:port": "lsof -ti :5001 | xargs kill -9 2>/dev/null || true"
   },
   "keywords": [
     "education",
@@ -23,3 +24,4 @@
   "author": "Eduminatti Engineering Team",
   "license": "ISC"
 }
+
