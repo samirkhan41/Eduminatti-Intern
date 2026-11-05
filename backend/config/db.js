@@ -12,7 +12,7 @@ const connectDB = async () => {
     });
 
     isConnected = true;
-    console.log(`[Database] MongoDB Connected: ${conn.connection.host}`);
+    console.log(`[Database] MongoDB Connected: ${conn.connection.host} | DB: ${conn.connection.name}`);
     return conn;
   } catch (error) {
     isConnected = false;
