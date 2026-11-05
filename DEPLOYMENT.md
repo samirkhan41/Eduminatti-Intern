@@ -125,3 +125,4 @@ On **Railway** (https://railway.app):
 - [x] Sensitive credentials excluded from Git via `.gitignore`
 - [x] Health check endpoint active at `/api/health`
 - [x] Production build passes cleanly with zero errors
+

@@ -32,3 +32,4 @@ COPY --from=builder /app/frontend/dist ./frontend/dist
 EXPOSE 5001
 
 CMD ["node", "backend/server.js"]
+
