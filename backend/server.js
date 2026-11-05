@@ -66,4 +66,20 @@ server.on('error', (err) => {
   }
 });
 
+// Graceful cleanup so nodemon restarts never leave ports in TIME_WAIT
+const shutdown = () => {
+  server.close(() => {
+    process.exit(0);
+  });
+  setTimeout(() => process.exit(0), 1000);
+};
+
+process.on('SIGINT', shutdown);
+process.on('SIGTERM', shutdown);
+process.once('SIGUSR2', () => {
+  server.close(() => {
+    process.kill(process.pid, 'SIGUSR2');
+  });
+});
+
 module.exports = app;
