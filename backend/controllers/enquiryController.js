@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Enquiry = require('../models/Enquiry');
 const { getDBStatus } = require('../config/db');
 
@@ -83,6 +84,9 @@ const submitEnquiry = async (req, res) => {
     const userId = req.user ? req.user._id : null;
 
     if (isConnected) {
+      const validSchoolId = school && mongoose.Types.ObjectId.isValid(school) ? school : null;
+      const validUserId = userId && mongoose.Types.ObjectId.isValid(userId) ? userId : null;
+
       const enquiry = await Enquiry.create({
         parentName,
         email,
@@ -90,10 +94,10 @@ const submitEnquiry = async (req, res) => {
         studentName,
         currentClass,
         preferredAdmissionYear: preferredAdmissionYear || '2025-2026',
-        school: school || null,
+        school: validSchoolId,
         schoolName: schoolName || 'General Discovery Enquiry',
         message: message || '',
-        user: userId,
+        user: validUserId,
         status: 'New',
       });
 
@@ -233,6 +237,9 @@ const updateEnquiryStatus = async (req, res) => {
     const isConnected = getDBStatus();
 
     if (isConnected) {
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ success: false, message: 'Invalid enquiry identifier' });
+      }
       const enquiry = await Enquiry.findById(id);
       if (!enquiry) {
         return res.status(404).json({ success: false, message: 'Enquiry record not found' });
@@ -276,6 +283,9 @@ const deleteEnquiry = async (req, res) => {
     const isConnected = getDBStatus();
 
     if (isConnected) {
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ success: false, message: 'Invalid enquiry identifier' });
+      }
       const enquiry = await Enquiry.findByIdAndDelete(id);
       if (!enquiry) {
         return res.status(404).json({ success: false, message: 'Enquiry not found' });

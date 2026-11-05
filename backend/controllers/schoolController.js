@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const School = require('../models/School');
 const { getDBStatus } = require('../config/db');
 const { schoolsData } = require('../utils/seedData');
@@ -422,6 +423,10 @@ const updateSchool = async (req, res) => {
     const isConnected = getDBStatus();
 
     if (isConnected) {
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ success: false, message: 'Invalid school identifier' });
+      }
+
       const school = await School.findByIdAndUpdate(id, req.body, {
         new: true,
         runValidators: true,
@@ -468,6 +473,9 @@ const deleteSchool = async (req, res) => {
     const isConnected = getDBStatus();
 
     if (isConnected) {
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ success: false, message: 'Invalid school identifier' });
+      }
       const school = await School.findByIdAndDelete(id);
       if (!school) {
         return res.status(404).json({ success: false, message: 'School not found' });

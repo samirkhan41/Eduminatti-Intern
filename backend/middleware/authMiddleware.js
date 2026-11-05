@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose');
 const User = require('../models/User');
 const { getDBStatus } = require('../config/db');
 
@@ -18,7 +19,18 @@ const protect = async (req, res, next) => {
 
       const isConnected = getDBStatus();
       if (isConnected) {
-        req.user = await User.findById(decoded.id).select('-password');
+        if (mongoose.Types.ObjectId.isValid(decoded.id)) {
+          req.user = await User.findById(decoded.id).select('-password');
+        } else if (decoded.id === 'mock-admin-01') {
+          req.user = await User.findOne({ email: 'admin@eduminatti.com' }).select('-password');
+        } else if (decoded.id === 'mock-parent-02') {
+          req.user = await User.findOne({ email: 'parent@eduminatti.com' }).select('-password');
+        } else {
+          return res.status(401).json({
+            success: false,
+            message: 'Session expired from previous offline session. Please log in again.',
+          });
+        }
       } else {
         // Fallback for in-memory evaluation
         if (decoded.id === 'mock-admin-01') {
@@ -47,6 +59,12 @@ const protect = async (req, res, next) => {
 
       next();
     } catch (error) {
+      return res.status(401).json({
+        success: false,
+        message: 'Not authorized, token invalid or expired. Please sign in again.',
+      });
+    }
+  }
       console.error('Token verification error:', error.message);
       return res.status(401).json({
         success: false,

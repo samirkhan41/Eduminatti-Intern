@@ -24,12 +24,9 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response && error.response.status === 401) {
-      // If token expired, clear invalid token
-      const currentPath = window.location.pathname;
-      if (currentPath.startsWith('/admin') || currentPath.startsWith('/profile')) {
-        localStorage.removeItem('eduminatti_token');
-        localStorage.removeItem('eduminatti_user');
-      }
+      // Clear invalid or stale token from browser storage
+      localStorage.removeItem('eduminatti_token');
+      localStorage.removeItem('eduminatti_user');
     }
     return Promise.reject(error);
   }

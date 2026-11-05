@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const User = require('../models/User');
 const generateToken = require('../utils/generateToken');
 const { getDBStatus } = require('../config/db');
@@ -215,7 +216,7 @@ const loginUser = async (req, res) => {
 const getUserProfile = async (req, res) => {
   try {
     const isConnected = getDBStatus();
-    if (isConnected && req.user) {
+    if (isConnected && req.user && mongoose.Types.ObjectId.isValid(req.user._id)) {
       const user = await User.findById(req.user._id).populate('savedSchools');
       return res.json({
         success: true,
@@ -241,7 +242,7 @@ const getUserProfile = async (req, res) => {
 const updateUserProfile = async (req, res) => {
   try {
     const isConnected = getDBStatus();
-    if (isConnected && req.user) {
+    if (isConnected && req.user && mongoose.Types.ObjectId.isValid(req.user._id)) {
       const user = await User.findById(req.user._id);
       if (user) {
         user.name = req.body.name || user.name;
