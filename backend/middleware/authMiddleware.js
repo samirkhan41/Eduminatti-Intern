@@ -57,18 +57,12 @@ const protect = async (req, res, next) => {
         });
       }
 
-      next();
+      return next();
     } catch (error) {
-      return res.status(401).json({
-        success: false,
-        message: 'Not authorized, token invalid or expired. Please sign in again.',
-      });
-    }
-  }
       console.error('Token verification error:', error.message);
       return res.status(401).json({
         success: false,
-        message: 'Not authorized, token invalid or expired',
+        message: 'Not authorized, token invalid or expired. Please sign in again.',
       });
     }
   }
