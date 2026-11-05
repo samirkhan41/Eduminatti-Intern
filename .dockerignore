@@ -1,0 +1,10 @@
+node_modules
+*/node_modules
+.git
+.gitignore
+backend/.env
+backend/.env.local
+frontend/.env.local
+dist
+frontend/dist
+npm-debug.log
