@@ -41,7 +41,7 @@ async function runTests() {
   console.log('4. Girls Boarding Schools Query :', girls.status, `count=${girls.data?.count}`, girls.data?.success ? '✓ PASS' : '✗ FAIL');
 
   // 5. Compare Schools
-  const compare = await request({ hostname: 'localhost', port: 5001, path: '/api/schools/compare?ids=mock-school-1,mock-school-2', method: 'GET' });
+  const compare = await request({ hostname: 'localhost', port: 5001, path: '/api/schools/compare?ids=ecole-globale-international-girls-school,the-doon-school', method: 'GET' });
   console.log('5. Multi-School Compare Query   :', compare.status, `count=${compare.data?.count}`, compare.data?.success ? '✓ PASS' : '✗ FAIL');
 
   // 6. Login as Parent
